@@ -1,5 +1,6 @@
 # Heart_Disease_Predictor
 ## Working App - https://jatin-mehra119-heart-disease-predictor.streamlit.app/
+
 ## Dataset Overview: CardioHealth Risk Assessment Dataset
 General Information: Total Entries: 270
 
@@ -43,7 +44,7 @@ Heart Disease: Presence or absence of heart disease (Presence, Absence)
 * Model HyperTunning
 * Saving the model
 
-This notebook includes all the obeservations and analysis from Data Visualization and Model Training.
+This notebook includes all the observations and analysis from Data Visualization and Model Training.
 
 
 ## Streamlit App
