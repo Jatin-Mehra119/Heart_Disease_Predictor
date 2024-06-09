@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 import pandas as pd
 
-model = joblib.load(r"C:\Users\jatin\OneDrive\Desktop\GitPROJECT\Heart Disease\Heart_Disease_Predictor\Cardio_healthRiskPred.pkl")
+model = joblib.load("Cardio_healthRiskPred.pkl")
 
 def predict_heart_disease(input_data):
     prediction = model.predict(input_data)
