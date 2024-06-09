@@ -10,6 +10,37 @@ def predict_heart_disease(input_data):
     prediction = model.predict(input_data)
     return prediction[0]
 
+# Function to provide health tips for those already having heart disease
+def provide_health_advice(user_data):
+    advice = [
+        "Consult with a healthcare professional about managing your condition.",
+        "Adopt a low-cholesterol diet and exercise regularly to manage cholesterol levels.",
+        "Manage your blood sugar levels through diet, exercise, and medication if necessary.",
+        "Monitor your blood pressure and consider lifestyle changes or medication to lower it.",
+        "Regular check-ups are important to monitor and manage your condition."
+    ]
+    return advice
+
+# Function to provide health tips for preventing heart disease
+def provide_health_tips(user_data):
+    tips = []
+    if user_data['Age'][0] > 50:
+        tips.append("Maintain a healthy diet and exercise regularly to manage your weight and blood pressure.")
+    if user_data['Sex'][0] == "Male":
+        tips.append("Regular check-ups are important, as men are at higher risk of heart disease.")
+    if user_data['BP'][0] > 130:
+        tips.append("Monitor your blood pressure and consider lifestyle changes or medication to lower it.")
+    if user_data['Cholesterol'][0] > 200:
+        tips.append("Adopt a low-cholesterol diet and exercise regularly to manage cholesterol levels.")
+    if user_data['FBS over 120'][0] == 1:
+        tips.append("Manage your blood sugar levels through diet, exercise, and medication if necessary.")
+    if user_data['Max HR'][0] < 100:
+        tips.append("Engage in regular physical activity to improve your heart rate.")
+    if user_data['Exercise angina'][0] == 1:
+        tips.append("Consult with a healthcare professional about managing angina symptoms during exercise.")
+    
+    return tips
+
 st.title("Heart Disease Predictor")
 
 st.write("Welcome to the Heart Disease Predictor!")
@@ -55,7 +86,15 @@ if st.button("Predict"):
     prediction = predict_heart_disease(user_input)
     if prediction == "Presence":
         st.write("Prediction: Heart Disease Present")
+        st.write("Health Advice:")
+        health_advice = provide_health_advice(user_input)
+        for advice in health_advice:
+            st.write(f"- {advice}")
     else:
         st.write("Prediction: Heart Disease Absent")
+        st.write("Health Tips to Avoid Future Heart Disease:")
+        health_tips = provide_health_tips(user_input)
+        for tip in health_tips:
+            st.write(f"- {tip}")
 
 st.write("The Model is Trained By Jatin Mehra. For more info Email me: jatinmehra119@gmail.com")
