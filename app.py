@@ -2,16 +2,16 @@ import streamlit as st
 import joblib
 import pandas as pd
 
-# Load the trained model
+
 model = joblib.load("Cardio_healthRiskPred.pkl")
 
-# Function to predict heart disease
+
 def predict_heart_disease(input_data):
     prediction = model.predict(input_data)
     return prediction[0]
 
-# Function to provide health tips for those already having heart disease
-def provide_health_advice(user_data):
+
+def provide_health_advice(user_data): # Present health tips
     advice = [
         "Consult with a healthcare professional about managing your condition.",
         "Adopt a low-cholesterol diet and exercise regularly to manage cholesterol levels.",
@@ -21,8 +21,8 @@ def provide_health_advice(user_data):
     ]
     return advice
 
-# Function to provide health tips for preventing heart disease
-def provide_health_tips(user_data):
+
+def provide_health_tips(user_data): # Absent health tips
     tips = []
     if user_data['Age'][0] > 50:
         tips.append("Maintain a healthy diet and exercise regularly to manage your weight and blood pressure.")
@@ -50,7 +50,7 @@ st.write("Disclaimer: The predictions made by this model are for informational p
 
 st.write("Please note that our model is trained with individuals aged between 28 and 85. Predictions for individuals outside this age range may not be accurate.")
 
-# User input fields
+# User input
 age = st.slider("Age", min_value=28, max_value=100, step=1)
 sex = st.selectbox("Sex", ["Female", "Male"])
 chest_pain_type = st.selectbox("Chest pain type", [1, 2, 3, 4])
@@ -65,7 +65,7 @@ slope_of_st = st.selectbox("Slope of the peak exercise ST segment", [1, 2, 3])
 num_vessels_fluro = st.selectbox("Number of major vessels colored by fluoroscopy", [0, 1, 2, 3])
 thallium = st.selectbox("Thallium stress test result", [3, 6, 7])
 
-# Convert user input to DataFrame
+
 user_input = pd.DataFrame({
     'Age': [age],
     'Sex': [sex],
