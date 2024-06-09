@@ -2,16 +2,14 @@ import streamlit as st
 import joblib
 import pandas as pd
 
-
-model = joblib.load("Cardio_healthRiskPred.pkl")
-
+model = joblib.load(r"C:\Users\jatin\OneDrive\Desktop\GitPROJECT\Heart Disease\Heart_Disease_Predictor\Cardio_healthRiskPred.pkl")
 
 def predict_heart_disease(input_data):
     prediction = model.predict(input_data)
     return prediction[0]
 
-
-def provide_health_advice(user_data): # Present health tips
+# health advice for those already having heart disease
+def provide_health_advice(user_data):
     advice = [
         "Consult with a healthcare professional about managing your condition.",
         "Adopt a low-cholesterol diet and exercise regularly to manage cholesterol levels.",
@@ -21,8 +19,8 @@ def provide_health_advice(user_data): # Present health tips
     ]
     return advice
 
-
-def provide_health_tips(user_data): # Absent health tips
+# health tips for preventing heart disease
+def provide_health_tips(user_data):
     tips = []
     if user_data['Age'][0] > 50:
         tips.append("Maintain a healthy diet and exercise regularly to manage your weight and blood pressure.")
@@ -50,7 +48,7 @@ st.write("Disclaimer: The predictions made by this model are for informational p
 
 st.write("Please note that our model is trained with individuals aged between 28 and 85. Predictions for individuals outside this age range may not be accurate.")
 
-# User input
+# User input 
 age = st.slider("Age", min_value=28, max_value=100, step=1)
 sex = st.selectbox("Sex", ["Female", "Male"])
 chest_pain_type = st.selectbox("Chest pain type", [1, 2, 3, 4])
@@ -94,7 +92,10 @@ if st.button("Predict"):
         st.write("Prediction: Heart Disease Absent")
         st.write("Health Tips to Avoid Future Heart Disease:")
         health_tips = provide_health_tips(user_input)
-        for tip in health_tips:
-            st.write(f"- {tip}")
+        if health_tips:
+            for tip in health_tips:
+                st.write(f"- {tip}")
+        else:
+            st.write("Great job! Keep maintaining a healthy lifestyle.")
 
 st.write("The Model is Trained By Jatin Mehra. For more info Email me: jatinmehra119@gmail.com")
